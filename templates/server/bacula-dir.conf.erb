@@ -1,0 +1,27 @@
+##### GERENCIADO PELO PUPPET!!! #######
+
+# Definicao do director
+
+Director {
+  Name = <%= @dirname %>
+  Description = "<%= @hostname %> director"
+  DIRport = <%= @dirport %>
+  Password = "<%= @dirpw %>"
+  QueryFile = "/etc/bacula/scripts/query.sql"
+  WorkingDirectory = "/var/lib/bacula"
+  PidDirectory = "/var/run/bacula"
+  Maximum Concurrent Jobs = <%= @dirmaxjobs %>
+  Messages = MensagensPadrao
+}
+
+@/etc/bacula/conf.d/Pools.conf
+@/etc/bacula/conf.d/Storages.conf
+@/etc/bacula/conf.d/Monitors.conf
+@/etc/bacula/conf.d/Messages.conf
+@/etc/bacula/conf.d/Catalogs.conf
+
+@/etc/bacula/conf.d/Schedules.conf
+@/etc/bacula/conf.d/Clients.conf
+@/etc/bacula/conf.d/FileSets.conf
+@/etc/bacula/conf.d/Jobs.conf
+

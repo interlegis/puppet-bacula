@@ -1,0 +1,62 @@
+###### MANAGED BY PUPPET  ########
+
+#####################################
+# Storage Daemon Configuration (SD) #
+#####################################
+
+Storage {
+  Name = <%= @sdname %>
+  SDPort = <%= @sdport %>
+  WorkingDirectory = "/var/lib/bacula"
+  Pid Directory = "/var/run/bacula"
+  Maximum Concurrent Jobs = <%= @sdmaxjobs %>
+}
+
+#############################
+# Disco Interno do servidor #
+#############################
+
+Device {
+  Name = <%= @hddrivename %>
+  Device Type = File
+  Media Type = File
+  Archive Device = <%= @hddrivepath %>
+  LabelMedia = yes
+  Random Access = yes
+  AutomaticMount = yes
+  RemovableMedia = no
+  SpoolDirectory = <%= @hddrivespool %>
+  Maximum Spool Size = <%= @hddrivespoolsize %>
+  Maximum Volume Size = <%= @hddrivevolsize %>
+}
+
+
+#############################################################
+# Lista de Directors com permissao de se comunicar com o SD #
+#############################################################
+
+Director {
+  Name = <%= @dirname %>
+  Password = "<%= storages[0]['sdpassword'] %>"
+}
+
+
+##############################################################################
+# Director Restrito: utilizado pelo "tray-monitor" para pegar o status do SD #
+##############################################################################
+
+Director {
+  Name = <%= @monname %>
+  Password = "<%= @monpw %>"
+  Monitor = yes
+}
+
+
+#########################################
+# Enviar todas as mensagens ao servidor #
+#########################################
+
+Messages {
+  Name = MensagensPadrao
+  director = <%= @dirname %> = all
+}

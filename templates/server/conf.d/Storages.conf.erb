@@ -1,0 +1,14 @@
+##### GERENCIADO PELO PUPPET #####
+
+# Define os Storages providos pelo Director para utilizacao em Jobs
+<% @storages.each do |storage| -%>
+
+Storage {
+  Name = <%= storage['name'] %>
+  Device = <%= storage['device'] %>
+  Media Type = <%= storage['mediatype'] %>
+  Address = <%= storage['address'] %>
+  SDPort = <%= storage['sdport'] %>
+  Password = "<%= storage['sdpassword'] %>"
+}
+<% end -%>

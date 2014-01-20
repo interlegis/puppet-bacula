@@ -1,0 +1,31 @@
+###### GERENCIADO PELO PUPPET!!!! ############################################
+
+# It is important to remember that bacula backups, by default,
+# do not cross different file systems. So, to create a Fileset
+# that contains multiple file systems, you must specify the option
+# "onefs", or declare the folders separetely on the FileSet.
+
+<% @filesets.each do |fileset| -%>
+
+FileSet {
+  Name = "<%= fileset['name'] %>"
+  Include {
+    Options { 
+<% 	fileset['options'].each do |option| -%>
+	<%=	option%>
+<% 	end -%>
+    }
+<%  fileset['include'].each do |folder| -%>
+    File = <%= folder %>
+<%  end -%>
+  }
+  Exclude {
+<%  if fileset['exclude'] 			-%>
+<%     fileset['exclude'].each do |folder|  	-%>
+    File = <%= folder %>
+<%     end -%>
+<%  end -%>
+  }
+}
+<% end -%>
+

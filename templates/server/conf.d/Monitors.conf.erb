@@ -1,0 +1,10 @@
+#### GERENCIADO PELO PUPPET!!! ######
+
+# Console para se conectar ao Director
+
+Console {
+  Name = <%= @monname %>
+  Password = <%= @monpw %>
+  CommandACL = status, .status
+}
+

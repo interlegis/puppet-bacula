@@ -1,0 +1,11 @@
+#### GERENCIADO PELO PUPPET!!!! #####
+#
+# Bacula User Agent (or Console) Configuration File
+#
+
+Director {
+  Name = <%= @dirname %>
+  DIRport = <%= @dirport %>
+  address = localhost
+  Password = "<%= @dirpw %>"
+}

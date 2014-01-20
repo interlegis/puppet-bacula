@@ -1,0 +1,17 @@
+### GERENCIADO PELO PUPPET!!! ###
+
+# Definicao padrao de mensagens do Bacula
+
+Messages {
+  Name = MensagensPadrao
+  mailcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\" -s
+\"Bacula: %t %e of %c %l\" %r"
+  operatorcommand = "/usr/lib/bacula/bsmtp -h localhost -f \"\(Bacula\) \<%r\>\"
+ -s \"Bacula: Intervention needed for %j\" %r"
+  mail = root@localhost = all, !skipped
+  operator = root@localhost = mount
+  console = all, !skipped, !saved
+  append = "/var/lib/bacula/log" = all, !skipped
+  catalog = all
+}
+

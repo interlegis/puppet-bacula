@@ -1,0 +1,12 @@
+##### GERENCIADO PELO PUPPET ####
+<% @schedules.each do |schedule| -%>
+
+Schedule {
+  Name = <%= schedule['name'] %>
+<% if schedule['runcfg'] -%>
+<%   schedule['runcfg'].each do |run| -%>
+  Run = <%= run %>
+<%   end -%>
+<% end -%>
+}
+<% end -%>

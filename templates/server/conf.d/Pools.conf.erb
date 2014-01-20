@@ -1,0 +1,14 @@
+##### GERENCIADO PELO PUPPET ####
+# Definicao de Pools
+
+<% @pools.each do |pool| -%>
+
+Pool {
+  Name = <%= pool['name']%>
+  Pool Type = <%= pool['type'] %>
+  Recycle = <%= pool['recycle'] %>
+  AutoPrune = <%= pool['autoprune'] %>
+  Volume Retention = <%= pool['retention'] %>
+}
+<% end -%>
+

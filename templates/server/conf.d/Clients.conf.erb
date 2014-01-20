@@ -1,0 +1,16 @@
+### GERENCIADO PELO PUPPET ###
+
+<% @clients.each do |client| -%>
+
+Client {
+  Name = <%= client['name'] %>
+  Address = <%= client['address'] %>
+  FDPort = <%= @fdport %>
+  Catalog = <%= @catalogname %>
+  Password = "<%= @fdpw %>"
+  File Retention = <%= client['fileretention'] %> 
+  Job Retention = <%= client['jobretention'] %>
+  AutoPrune = <%= @autoprune %>
+}
+<% end -%>
+

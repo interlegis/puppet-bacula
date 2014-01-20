@@ -1,0 +1,39 @@
+###### GERENCIADO PELO PUPPET! #####
+
+<% @jobs.each do |job| -%>
+
+Job {
+  Name = <%= job['name'] %>
+  Type = Backup
+  Level = <%= job['level'] %>
+  Client = <%= job['client'] %>
+  FileSet = "<%= job['fileset'] %>"
+  Schedule = "<%= job['schedule'] %>"
+<% if job['clientrunbeforejob'] -%>
+  Client Run Before Job = "<%= job['clientrunbeforejob'] %>"
+<% end -%>
+  Pool = <%= @defaultFullPool %>
+  Full Backup Pool = <%= @defaultFullPool%>
+  Differential Backup Pool = <%= @defaultDiffPool %>
+  Incremental Backup Pool = <%= @defaultIncPool %>
+  Storage = <%= @storages[0]['name'] %> 
+  Priority = 10
+  Messages = MensagensPadrao
+}
+<% end -%>
+
+Job {
+  Name = RestoreJob
+  Type = Restore
+  Level = Full
+  Client = <%= @clients[0]['name'] %>
+  FileSet = <%= @filesets[0]['name'] %>
+  Pool = <%= @defaultFullPool %>
+  Full Backup Pool = <%= @defaultFullPool %>
+  Differential Backup Pool = <%= @defaultDiffPool %>
+  Incremental Backup Pool = <%= @defaultIncPool %>
+  Storage = <%= @storages[0]['name'] %>
+  Priority = 10
+  Messages = MensagensPadrao
+}
+

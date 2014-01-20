@@ -1,0 +1,38 @@
+# GERENCIADO PELO PUPPET!!!
+# Arquivo de configuracao do Bacula File Daemon
+#
+
+#
+# List Directors who are permitted to contact this File daemon
+#
+Director {
+  Name = <%= @dirname %>
+  Password = "<%= @fdpw %>"
+}
+
+#
+# Restricted Director, used by tray-monitor to get the
+#   status of the file daemon
+#
+Director {
+  Name = <%= @monname %>
+  Password = "<%= @monpw %>"
+  Monitor = yes
+}
+
+#
+# "Global" File daemon configuration specifications
+#
+FileDaemon {                          # this is me
+  Name = <%= @fdname %>
+  FDport = <%= @fdport %>              # where we listen for the director
+  WorkingDirectory = /var/lib/bacula
+  Pid Directory = /var/run/bacula
+  Maximum Concurrent Jobs = <%= @fdmaxjobs %>
+}
+
+# Send all messages except skipped files back to Director
+Messages {
+  Name = Standard
+  director = <%= @dirname %> = all, !skipped
+}
